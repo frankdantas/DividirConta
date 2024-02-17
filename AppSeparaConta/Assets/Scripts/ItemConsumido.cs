@@ -25,6 +25,10 @@ public class ItemConsumido : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Recebe o objeto para preencher os dados na tela
+    /// </summary>
+    /// <param name="item"></param>
     public void SetValores(ItemConsumo item)
     {
         _itemConsumido = item;
@@ -33,16 +37,27 @@ public class ItemConsumido : MonoBehaviour
         txtSubTotal.text = string.Format("{0:C2}", item.GetSubTotal());
     }
 
+    /// <summary>
+    /// Recupera o item
+    /// </summary>
+    /// <returns></returns>
     public ItemConsumo GetItem()
     {
         return _itemConsumido;
     }
 
+    /// <summary>
+    /// Excluir esse item
+    /// </summary>
     public void onclick_excluirItem()
     {
+        print("Excluir o item");
         Controle.SINGLETON.deletarItemConsumido(this.gameObject);
     }
 
+    /// <summary>
+    /// Editar esse item
+    /// </summary>
     public void onclick_editar()
     {
         Controle.SINGLETON.SetItemParaeditar(this.gameObject);
