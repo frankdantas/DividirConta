@@ -7,13 +7,15 @@ using System.Linq;
 [System.Serializable]
 public class ConsumoTotal
 {
-    public Guid Id { get; set; }
-    public string Nome { get; set; }
-    public DateTime DataHora { get; set; }
-    public List<ItemConsumo> ListaConsumo { get; set; }
+    public string Id;
+    public string Nome;
+    public DateTime DataHora;
+    public List<ItemConsumo> ListaConsumo = new List<ItemConsumo>();
+    public List<ItemCardapio> Cardapio = new List<ItemCardapio>();
 
     public ConsumoTotal()
     {
+        Id = Guid.NewGuid().ToString();
         Nome = String.Empty;
         DataHora = DateTime.Now;
         ListaConsumo = new List<ItemConsumo>();
@@ -21,6 +23,7 @@ public class ConsumoTotal
 
     public ConsumoTotal(string _nome)
     {
+        Id = Guid.NewGuid().ToString();
         Nome = _nome;
         DataHora = DateTime.Now;
         ListaConsumo = new List<ItemConsumo>();

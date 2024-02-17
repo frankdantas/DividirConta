@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Assertions.Must;
+using System;
 
 public class ItemConsumido : MonoBehaviour
 {
@@ -40,5 +41,11 @@ public class ItemConsumido : MonoBehaviour
     public void onclick_excluirItem()
     {
         Controle.SINGLETON.deletarItemConsumido(this.gameObject);
+    }
+
+    public void onclick_editar()
+    {
+        Controle.SINGLETON.SetItemParaeditar(this.gameObject);
+        Controle.SINGLETON.onclick_abrirPainelEditItem();
     }
 }

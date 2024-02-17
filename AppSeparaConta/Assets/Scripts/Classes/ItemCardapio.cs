@@ -6,23 +6,23 @@ using UnityEngine;
 [System.Serializable]
 public class ItemCardapio
 {
-    public Guid Id { get; set; }
-    public string Nome { get; set; }
-    public double PrecoTotal { get; set; }
+    public string Id;
+    public string Nome;
+    public double PrecoTotal;
 
     public ItemCardapio()
     {
-
+        Id = Guid.NewGuid().ToString();
     }
 
     public ItemCardapio(string _nome, double _preco)
     {
-        Id = Guid.NewGuid();
+        Id = Guid.NewGuid().ToString();
         Nome = _nome;
         PrecoTotal = _preco;
     }
 
-    public ItemCardapio(Guid _id, string _nome, double _preco)
+    public ItemCardapio(string _id, string _nome, double _preco)
     {
         Id= _id;
         Nome = _nome;

@@ -6,25 +6,25 @@ using System;
 [System.Serializable]
 public class ItemConsumo
 {
-    public Guid Id { get; set; }
-    public int DivididoEm { get; set; }
-    public int PartesPagas { get; set; }
-    public ItemCardapio ItemDoCardapio { get; set; }
+    public string Id;
+    public int DivididoEm;
+    public int PartesPagas;
+    public ItemCardapio ItemDoCardapio = new ItemCardapio();
 
     public ItemConsumo()
     {
-        Id = Guid.NewGuid();
+        Id = Guid.NewGuid().ToString();
         DivididoEm = 1;
         PartesPagas = 1;
     }
     public ItemConsumo(int _divididoEm, int _partesPagas, ItemCardapio _itemCardapio)
     {
-        Id = Guid.NewGuid();
+        Id = Guid.NewGuid().ToString();
         DivididoEm = _divididoEm;
         PartesPagas = _partesPagas;
         ItemDoCardapio = _itemCardapio;
     }
-    public ItemConsumo(Guid _id, int _divididoEm, int _partesPagas, ItemCardapio _itemCardapio)
+    public ItemConsumo(string _id, int _divididoEm, int _partesPagas, ItemCardapio _itemCardapio)
     {
         Id = _id;
         DivididoEm = _divididoEm;
