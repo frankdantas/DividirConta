@@ -120,7 +120,8 @@ public class Controle : MonoBehaviour
     {
         string nome = inputNomeItemCardapio.text.Trim();
         double preco = 0;
-        if(double.TryParse(inputPrecoItemCardapio.text, out preco))
+        string precoInserido = inputPrecoItemCardapio.text.Replace(".", ",");
+        if (double.TryParse(precoInserido, out preco))
         {
             ItemCardapio novoItem = new ItemCardapio(nome, preco);
             cardapio.Add(novoItem);
