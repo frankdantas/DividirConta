@@ -25,11 +25,11 @@ Logo mais trarei novidades de atualização, essa é apenas uma prévia.
 
 - Recuperar dados do último *rolê* caso feche o aplicativo por engano.
 
-- Histórico dos *rolês* contabilizados pelo app.
+- Histórico dos *rolês* que foram registrados no app.
 
 ## Recursos
 
-As imagens dos ícones forem retiradas do repositório:
+As imagens dos ícones (deletar, editar e excluir) foram retiradas do repositório:
 
 https://www.flaticon.com/br/
 
