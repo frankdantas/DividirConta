@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Assertions.Must;
 using System;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class ItemConsumido : MonoBehaviour
 {

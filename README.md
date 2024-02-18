@@ -23,6 +23,8 @@ Foi criado e compilado para Android versão **7.0 Nougat ou superior**, com API 
 
 Logo mais trarei novidades de atualização, essa é apenas uma prévia.
 
+- Recuperar dados do último *rolê* caso feche o aplicativo por engano.
+
 - Histórico dos *rolês* contabilizados pelo app.
 
 ## Recursos

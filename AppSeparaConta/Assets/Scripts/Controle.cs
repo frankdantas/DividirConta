@@ -43,11 +43,14 @@ public class Controle : MonoBehaviour
     public TMP_Text txtAvisoAddCardapio;
     public TMP_Text txtAvisoEditCardapio;
 
-
+#if UNITY_EDITOR
     [SerializeField]
+#endif
     private ConsumoTotal _consumoTotal = new ConsumoTotal();
     private List<ItemCardapio> cardapio = new List<ItemCardapio>();
+#if UNITY_EDITOR
     [SerializeField]
+#endif
     private List<ItemConsumido> listaItemConsumido = new List<ItemConsumido>();
     private ItemCardapio itemPreselecionado = new ItemCardapio();
     private GameObject itemParaEditar = null;
@@ -211,6 +214,8 @@ public class Controle : MonoBehaviour
             dropPagarPartes.interactable = true;
             btnAdicionar.interactable = true;
             btnEditCardapio.interactable = true;
+
+            onchange_mudouDivididoEm(0);
         }
         else
         {
@@ -223,6 +228,8 @@ public class Controle : MonoBehaviour
             dropPagarPartes.SetValueWithoutNotify(0);
             dropDivididoEm.SetValueWithoutNotify(0);
         }
+
+        
     }
 
     /// <summary>
@@ -238,6 +245,7 @@ public class Controle : MonoBehaviour
             lista.Add($"{i+1}/{dropDivididoEm.value+1}");
         }
         dropPagarPartes.AddOptions(lista);
+        dropPagarPartes.value = 0;
         AtualizaDadosItemTela();
     }
 
@@ -263,6 +271,7 @@ public class Controle : MonoBehaviour
             lista.Add($"{i + 1}/{dropEditDivididoEm.value + 1}");
         }
         dropEditPagarPartes.AddOptions(lista);
+        dropEditPagarPartes.value = 0;
         AtualizaDadosItemTelaEdit();
     }
 
@@ -339,7 +348,7 @@ public class Controle : MonoBehaviour
     private void AtualizarConsumoTotal()
     {
         txtConsumoTotal.text = string.Format("Total: {0:C2}", _consumoTotal.GetConsumoTotal());
-        SalvarJson();
+        //SalvarJson();
     }
 
     public void onclick_deletarItemCardapio()
@@ -413,6 +422,7 @@ public class Controle : MonoBehaviour
     {
         MostrarAvisoAddCardapio("");
         painelCadCardapio.SetActive(true);
+        inputNomeItemCardapio.Select();
     }
 
     /// <summary>
