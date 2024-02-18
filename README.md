@@ -1,4 +1,4 @@
-# Separar a conta
+# Dividir a conta
 
 ## O que é o app
 
