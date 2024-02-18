@@ -23,7 +23,13 @@ Foi criado e compilado para Android versão **7.0 Nougat ou superior**, com API 
 
 Logo mais trarei novidades de atualização, essa é apenas uma prévia.
 
-- Edição do preço do item do cardápio.
-- Exclusão do item do cardápio.
 - Histórico dos *rolês* contabilizados pelo app.
+
+## Recursos
+
+As imagens dos ícones forem retiradas do repositório:
+
+https://www.flaticon.com/br/
+
+
 
