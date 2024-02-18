@@ -35,12 +35,12 @@ https://www.flaticon.com/br/
 
 ## Imagens
 
-<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218091911693.png" alt="image-20240218091911693" width="300" /><img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218091935004.png" alt="image-20240218091935004" width="300" />
+<img src="./assets/image-20240218091911693.png" alt="image-20240218091911693" width="300" /><img src="./assets/image-20240218091935004-1708259165261-15.png" alt="image-20240218091935004" width="300" />
 
-<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092005249.png" alt="image-20240218092005249" width="300" />
+<img src="./assets/image-20240218092005249-1708259162803-13.png" alt="image-20240218092005249" width="300" />
 
-<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092039346.png" alt="image-20240218092039346" width="300" />
+<img src="./assets/image-20240218092039346-1708259160632-11.png" alt="image-20240218092039346" width="300" />
 
-<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092059651.png" alt="image-20240218092059651" width="300" />
+<img src="./assets/image-20240218092059651-1708259158455-9.png" alt="image-20240218092059651" width="300" />
 
-<img src="D:\Unity\AppConta\SeparaGastos\assets\Sem título.jpg" alt="Sem título" width="300" />
+<img src="./assets/Sem título-1708259154414-7.jpg" alt="Sem título" width="300" />
