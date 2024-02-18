@@ -35,3 +35,12 @@ https://www.flaticon.com/br/
 
 ## Imagens
 
+<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218091911693.png" alt="image-20240218091911693" width="300" /><img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218091935004.png" alt="image-20240218091935004" width="300" />
+
+<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092005249.png" alt="image-20240218092005249" width="300" />
+
+<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092039346.png" alt="image-20240218092039346" width="300" />
+
+<img src="D:\Unity\AppConta\SeparaGastos\assets\image-20240218092059651.png" alt="image-20240218092059651" width="300" />
+
+<img src="D:\Unity\AppConta\SeparaGastos\assets\Sem título.jpg" alt="Sem título" width="300" />
