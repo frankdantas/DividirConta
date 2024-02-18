@@ -14,6 +14,9 @@ public class Controle : MonoBehaviour
     [Header("Cardapio")]
     public TMP_InputField inputNomeItemCardapio;
     public TMP_InputField inputPrecoItemCardapio;
+    public TMP_InputField inputNomeItemCardapioEdit;
+    public TMP_InputField inputPrecoItemCardapioEdit;
+    public Button btnEditCardapio;
     [Space]
     [Header("Lista consumo")]
     public Button btnAdicionar;
@@ -32,13 +35,20 @@ public class Controle : MonoBehaviour
     [Space]
     public GameObject painelCadCardapio;
     public GameObject painelEditItem;
+    public GameObject painelEditCardapio;
     [Space]
     public Transform painelContentLista;
     public GameObject prefabItemLista;
+    [Space]
+    public TMP_Text txtAvisoAddCardapio;
+    public TMP_Text txtAvisoEditCardapio;
+
 
     [SerializeField]
     private ConsumoTotal _consumoTotal = new ConsumoTotal();
     private List<ItemCardapio> cardapio = new List<ItemCardapio>();
+    [SerializeField]
+    private List<ItemConsumido> listaItemConsumido = new List<ItemConsumido>();
     private ItemCardapio itemPreselecionado = new ItemCardapio();
     private GameObject itemParaEditar = null;
 
@@ -57,9 +67,11 @@ public class Controle : MonoBehaviour
         AtualizarItensDropCardapio();
         onclick_fecharPainelCadCardapio();
         onclick_fecharPainelEditItem();
+        onclick_fecharPainelEditCardapio();
         btnAdicionar.interactable = false;
         dropDivididoEm.interactable = false;
         dropPagarPartes.interactable = false;
+        btnEditCardapio.interactable = false;
     }
     
     void Update()
@@ -118,10 +130,11 @@ public class Controle : MonoBehaviour
     /// </summary>
     public void onclick_novoItemCardapio()
     {
+        MostrarAvisoAddCardapio("");
         string nome = inputNomeItemCardapio.text.Trim();
         double preco = 0;
         string precoInserido = inputPrecoItemCardapio.text.Replace(".", ",");
-        if (double.TryParse(precoInserido, out preco))
+        if (double.TryParse(precoInserido, out preco) && !string.IsNullOrEmpty(nome))
         {
             ItemCardapio novoItem = new ItemCardapio(nome, preco);
             cardapio.Add(novoItem);
@@ -129,11 +142,16 @@ public class Controle : MonoBehaviour
             cardapio = cardapio.OrderBy(x => x.Nome).ToList();
 
             AtualizarItensDropCardapio();
-            onclick_fecharPainelCadCardapio();
+            
             inputNomeItemCardapio.text = "";
             inputPrecoItemCardapio.text = "";
-
             _consumoTotal.Cardapio = cardapio;
+
+            onclick_fecharPainelCadCardapio();
+        }
+        else
+        {
+            MostrarAvisoAddCardapio("Verifique os dados inseridos");
         }
 
 
@@ -192,6 +210,7 @@ public class Controle : MonoBehaviour
             dropDivididoEm.interactable = true;
             dropPagarPartes.interactable = true;
             btnAdicionar.interactable = true;
+            btnEditCardapio.interactable = true;
         }
         else
         {
@@ -200,6 +219,7 @@ public class Controle : MonoBehaviour
             dropDivididoEm.interactable = false;
             dropPagarPartes.interactable = false;
             btnAdicionar.interactable = false;
+            btnEditCardapio.interactable = false;
             dropPagarPartes.SetValueWithoutNotify(0);
             dropDivididoEm.SetValueWithoutNotify(0);
         }
@@ -306,7 +326,9 @@ public class Controle : MonoBehaviour
     private void AdicionarListaConsumo(ItemConsumo item)
     {
         GameObject copia = Instantiate(prefabItemLista, painelContentLista.position, Quaternion.identity, painelContentLista);
-        copia.GetComponent<ItemConsumido>().SetValores(item);
+        ItemConsumido itemCriado = copia.GetComponent<ItemConsumido>();
+        listaItemConsumido.Add(itemCriado);
+        itemCriado.SetValores(item);
 
         AtualizarConsumoTotal();
     }
@@ -317,8 +339,71 @@ public class Controle : MonoBehaviour
     private void AtualizarConsumoTotal()
     {
         txtConsumoTotal.text = string.Format("Total: {0:C2}", _consumoTotal.GetConsumoTotal());
-
         SalvarJson();
+    }
+
+    public void onclick_deletarItemCardapio()
+    {
+        MostrarAvisoEditCardapio("");
+        bool existe = _consumoTotal.ListaConsumo.Any(x => x.ItemDoCardapio.Id == itemPreselecionado.Id);
+        if (existe)
+        {
+            MostrarAvisoEditCardapio("Esse item já foi consumido. Para excluí-lo, remove o item consumido da lista de consumo.");
+        }
+        else
+        {
+            MostrarAvisoEditCardapio("Deletando...");
+            ItemCardapio itemDeletar = cardapio.Where(x => x.Id == itemPreselecionado.Id).FirstOrDefault();
+            if(itemDeletar != null)
+            {
+                cardapio.Remove(itemDeletar);
+                _consumoTotal.Cardapio = cardapio;
+
+                AtualizarItensDropCardapio();
+                onclick_fecharPainelEditCardapio();
+            }
+
+        }
+    }
+
+    public void onclick_salvarEditCardapio()
+    {
+        MostrarAvisoEditCardapio("");
+        string nome = inputNomeItemCardapioEdit.text.Trim();
+        double preco = 0;
+        string precoInserido = inputPrecoItemCardapioEdit.text.Replace(".", ",");
+        if (double.TryParse(precoInserido, out preco) && !string.IsNullOrEmpty(nome))
+        {
+            itemPreselecionado.Nome = nome;
+            itemPreselecionado.PrecoTotal = preco;
+
+
+            ItemCardapio itemEditado = cardapio.Where(x => x.Id == itemPreselecionado.Id).FirstOrDefault();
+            if(itemEditado != null)
+            {
+                itemEditado.Nome = nome;
+                itemEditado.PrecoTotal = preco;
+            }
+
+            AtualizarItensDropCardapio();
+            onclick_fecharPainelEditCardapio();
+
+            inputNomeItemCardapioEdit.text = "";
+            inputPrecoItemCardapioEdit.text = "";
+
+            _consumoTotal.Cardapio = cardapio;
+
+            foreach (var item in listaItemConsumido)
+            {
+                item.AutoUpdate();
+            }
+
+            AtualizarConsumoTotal();
+        }
+        else
+        {
+            MostrarAvisoEditCardapio("Verifique os dados inseridos");
+        }
     }
 
     /// <summary>
@@ -326,6 +411,7 @@ public class Controle : MonoBehaviour
     /// </summary>
     public void onclick_abrirPainelCadCardapio()
     {
+        MostrarAvisoAddCardapio("");
         painelCadCardapio.SetActive(true);
     }
 
@@ -335,6 +421,26 @@ public class Controle : MonoBehaviour
     public void onclick_fecharPainelCadCardapio()
     {
         painelCadCardapio.SetActive(false);
+    }
+
+    /// <summary>
+    /// mostra o painel de editar item no cardapio
+    /// </summary>
+    public void onclick_abrirPainelEditCardapio()
+    {
+        MostrarAvisoEditCardapio("");
+        inputNomeItemCardapioEdit.text = itemPreselecionado.Nome;
+        string precoFormatado = string.Format("{0:F2}", itemPreselecionado.PrecoTotal);
+        inputPrecoItemCardapioEdit.text = precoFormatado.Replace(".", "").Replace(",", ".");
+        painelEditCardapio.SetActive(true);
+    }
+
+    /// <summary>
+    /// Esconde o painel de editar item no cardapio
+    /// </summary>
+    public void onclick_fecharPainelEditCardapio()
+    {
+        painelEditCardapio.SetActive(false);
     }
 
     /// <summary>
@@ -394,6 +500,10 @@ public class Controle : MonoBehaviour
                 bool result = _consumoTotal.ListaConsumo.Remove(buscaParaExcluir);
                 if (result)
                 {
+
+                    ItemConsumido itemDelLista = listaItemConsumido.Where(x => x.GetItem().Id == itemExcluir.Id).FirstOrDefault();
+                    listaItemConsumido.Remove(itemDelLista);
+
                     print("Excluir item com id " + itemExcluir.Id);
                     AtualizarConsumoTotal();
                     Destroy(itemDaLista);
@@ -409,6 +519,16 @@ public class Controle : MonoBehaviour
         {
             print("Nao acho item para excluir");
         }
+    }
+
+    private void MostrarAvisoAddCardapio(string aviso)
+    {
+        txtAvisoAddCardapio.text = aviso;
+    }
+
+    private void MostrarAvisoEditCardapio(string aviso)
+    {
+        txtAvisoEditCardapio.text = aviso;
     }
 
     /// <summary>

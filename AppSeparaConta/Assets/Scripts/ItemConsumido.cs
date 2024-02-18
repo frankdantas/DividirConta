@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Assertions.Must;
 using System;
+using static UnityEditor.Progress;
 
 public class ItemConsumido : MonoBehaviour
 {
@@ -35,6 +36,13 @@ public class ItemConsumido : MonoBehaviour
         txtNome.text = item.ItemDoCardapio.Nome;
         txtDivisao.text = $"{item.PartesPagas}/{item.DivididoEm}";
         txtSubTotal.text = string.Format("{0:C2}", item.GetSubTotal());
+    }
+
+    public void AutoUpdate()
+    {
+        txtNome.text = _itemConsumido.ItemDoCardapio.Nome;
+        txtDivisao.text = $"{_itemConsumido.PartesPagas}/{_itemConsumido.DivididoEm}";
+        txtSubTotal.text = string.Format("{0:C2}", _itemConsumido.GetSubTotal());
     }
 
     /// <summary>
